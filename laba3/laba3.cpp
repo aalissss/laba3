@@ -42,8 +42,10 @@ struct List {
 		Node* newNode = new Node;
 		newNode->data = val;
 		newNode->next = temp;
-		previous->next = newNode;
-		cnt++;
+		if (previous != nullptr) {
+			previous->next = newNode;
+			cnt++;
+		}
 	}
 
 	//удаление из коллекции элемента в заданной позиции
@@ -54,8 +56,10 @@ struct List {
 			previous = temp;
 			temp = temp->next;
 		}
-		previous->next = temp->next;
-		cnt--;
+		if (previous != nullptr) {
+			delete temp;
+			cnt--;
+		}
 	}
 	
 	//доступ к информационной части элемента в данной позиции
@@ -84,7 +88,6 @@ struct List {
 			cnt++;
 		}
 		while (temp->next != first) {
-			prev = temp;
 			temp = temp->next;
 			if (temp->data < 0) {
 				Node* newNode = new Node;
@@ -140,13 +143,17 @@ struct List {
 
 	//удаление всех элементов коллекции
 	void clear() {
-		while (first != nullptr) {
-			Node* temp = first;
-			first = first->next;
-			delete temp;
+		if (cnt > 0) {
+			while (first->next != nullptr) {
+				Node* temp = first;
+				first = first->next;
+				delete temp;
+				cnt--;
+			}
+			delete first;
+			first = nullptr;
+			cnt = 0;
 		}
-		first = nullptr;
-		cnt = 0;
 	}
 };
 
@@ -162,7 +169,7 @@ int main()
 	cout << "9. deleting all items from the list" << endl << "10. program termination" << endl;
 
 	while (true) {
-		int data, numb, cnt = 0;
+		int data, numb;
 		cin >> numb;
 		switch (numb) {
 		case 1:

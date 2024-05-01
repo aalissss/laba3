@@ -175,8 +175,8 @@ struct List {
         for (int i = cnt; i > 0; i--) {
             if (temp->data == number) {
                 cntElement++;
-                toNext();
             }
+            toNext();
         }
         return cntElement;
     }

@@ -88,13 +88,13 @@ struct List {
         }
         else {
             prev = last;
-            last->next = newNode;
+            temp = newNode;
             cnt++;
-        } 
+            position = count() - 1;
+            last->next = newNode;
+        }
         newNode->next = first;
-        temp = newNode;
         last = newNode;
-        position = count() - 1;
     }
 
     //вставка в данную позицию данного значения

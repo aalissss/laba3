@@ -90,10 +90,11 @@ struct List {
             prev = last;
             last->next = newNode;
             cnt++;
-        }
+        } 
         newNode->next = first;
+        temp = newNode;
         last = newNode;
-        elementAt(cnt - 1);
+        position = count() - 1;
     }
 
     //вставка в данную позицию данного значения
